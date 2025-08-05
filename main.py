@@ -24,3 +24,11 @@ housing_train_set['people_per_house'] = housing_train_set['population'] / housin
 
 # Using same functions, more coefficients now though.
 deep_data_explore(housing_train_set)
+
+# Prep data for cleaning
+
+# Drop our target column, and return a copy of potential features
+housing = train_set.drop("median_house_value", axis=1)
+
+# Make a copy of the labels/target to prep for training.
+housing_labels = train_set["median_house_value"].copy()
