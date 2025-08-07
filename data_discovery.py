@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def deep_data_explore(housing: pd.DataFrame):
+  housing = housing.copy()
   # Population size directly related to circle diameter, and price directly related to color.
   housing.plot(
     kind='scatter',
