@@ -76,24 +76,18 @@ def cluster_similiar_pipeline():
 def default_num_pipeline():
   return make_pipeline(SimpleImputer(strategy='median'), StandardScaler())
   
-def preprocessor(housing: pd.DataFrame) -> pd.DataFrame:
+def preprocessor() -> ColumnTransformer:
   preprocessing = ColumnTransformer(
     [
-      ("bedrooms", ratio_pipeline(), ["total_bedrooms", "total_rooms"]),
-      ("rooms_per_house", ratio_pipeline(), ["total_rooms", "households"]),
-      ("people_per_house", ratio_pipeline(), ["population", "households"]),
-      ("log", log_pipeline(), ["total_bedrooms", "total_rooms", "population",
-                              "households", "median_income"]),
-      ("geo", cluster_similiar_pipeline(), ["latitude", "longitude"]),
-      ("cat", cat_pipeline(), make_column_selector(dtype_include=object)),
+      ('bedrooms', ratio_pipeline(), ['total_bedrooms', 'total_rooms']),
+      ('rooms_per_house', ratio_pipeline(), ['total_rooms', 'households']),
+      ('people_per_house', ratio_pipeline(), ['population', 'households']),
+      ('log', log_pipeline(), ['total_bedrooms', 'total_rooms', 'population',
+                              'households', 'median_income']),
+      ('geo', cluster_similiar_pipeline(), ['latitude', 'longitude']),
+      ('cat', cat_pipeline(), make_column_selector(dtype_include=object)),
     ],
     remainder=default_num_pipeline()
   )
   
-  preprocessed =  preprocessing.fit_transform(housing)
-  
-  return pd.DataFrame(
-    preprocessed,
-    index=housing.index,
-    columns=preprocessing.get_feature_names_out()
-  )
+  return preprocessing

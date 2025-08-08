@@ -14,3 +14,12 @@ General Steps
   3. Logarithmic scaling is applied to several columns to handle heavily scewed data
   4. Several new features are created based off simple math from original columns in the dataset
   5. A custom transformer class is created that leverages k-means algorithm to create clusters and score each record on its proximity to those clusters
+5. Once the pre-processing is set up, then the model is trained. Randomized search is used to iterate over various hyperparametes and features, training the model on different combinations. The best model is picked based off of the RMSE. The RMSE for this model and it's parameters is $41,533.
+6. This is where I'm stopping this project, but I'll mention possible next steps.
+
+
+## Possible Next Steps
+
+1. We can explored even more feature and hyperparmeter tuning to try and reduce that RMSE even further. In this project I only used a few variations, so we would likely see some improvement there.
+2. Different models can be tested as well, which potentially could yield better results also.
+3. This model could be deployed so that in can be used via an API or user interface of some sorts.
